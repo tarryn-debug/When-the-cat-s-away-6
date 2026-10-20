@@ -288,17 +288,6 @@
       padding-bottom: 2rem;
     }
 
-    /* TRIANGLE BEAM SVG POSITIONED FLUSH WITH CARD TOP BORDER */
-    .spotlight-triangle-bg {
-      position: absolute;
-      top: 23%;
-      width: 860px;
-      max-width: 92%;
-      height: auto;
-      z-index: 310;
-      pointer-events: none;
-    }
-
     /* CIRCULAR SPOTLIGHT FRAME */
     .spotlight-circle-frame {
       position: absolute;
@@ -332,23 +321,37 @@
       filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4));
     }
 
-    /* DIALOG CARD WITH FLUSH TOP PADDING TO REMOVE GAP */
+    /* DIALOG CARD WITH INTEGRATED TRIANGLE BEAM PSEUDO-ELEMENT (ZERO GAP) */
     .dialog-card {
       background: #ffffff;
       border-radius: 4px;
-      width: 860px;
+      width: 960px;
       max-width: 92%;
-      padding: 1rem 2.5rem 1.75rem;
+      padding: 2rem 2.75rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       position: relative;
       z-index: 315;
       margin-top: 0;
     }
 
+    .dialog-card::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      background-image: url('Resources/PastedVector-30.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      pointer-events: none;
+      z-index: 310;
+    }
+
     .dialog-card h2 {
       font-size: 1.45rem;
       color: var(--color-text-dark);
-      margin-top: 0.25rem;
       margin-bottom: 1rem;
       font-weight: 700;
       border-bottom: 1px solid #eaeaea;
@@ -363,7 +366,7 @@
 
     .close-card-btn {
       position: absolute;
-      top: 1rem;
+      top: 1.25rem;
       right: 1.25rem;
       background: #ffffff;
       border: 1.5px solid var(--color-primary-blue);
@@ -547,8 +550,6 @@
     <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
     <div class="dark-overlay" id="content-modal">
       <div class="spotlight-view-container">
-        <!-- PastedVector-30.svg: Dark Blue Triangle Beam -->
-        <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
 
         <!-- PastedVector-29.svg: Circular Regional Map -->
         <div class="spotlight-circle-frame">
