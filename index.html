@@ -246,7 +246,7 @@
       }
     }
 
-    /* YOUR EXACT PROPOSED PIN COORDINATES (UNTOUCHED) */
+    /* PIN COORDINATES */
     .pin-ukraine    { top: 25.6%; left: 55.3%; }
     .pin-turkey     { top: 32.4%; left: 56.5%; }
     .pin-georgia    { top: 30.1%; left: 59.0%; }
@@ -258,6 +258,7 @@
     /* ========================================================= */
     /* 3. MODALS & SPOTLIGHT OVERLAYS                            */
     /* ========================================================= */
+    /* CHANGE 1: z-index set to 300 to cover entire block including header */
     .dark-overlay {
       position: absolute;
       inset: 0;
@@ -276,7 +277,6 @@
       pointer-events: auto;
     }
 
-    /* UKRAINE SPOTLIGHT OVERLAY LAYERS */
     .spotlight-view-container {
       position: relative;
       width: 100%;
@@ -503,7 +503,7 @@
     </header>
 
     <main class="stage-view">
-      <!-- BASE MAP -->
+      <!-- CHANGE 2: BASE MAP REMAINS PastedVector-16.svg -->
       <img src="Resources/PastedVector-16.svg" id="main-world-map" alt="World Map" class="world-map-svg">
 
       <!-- Map Pins -->
@@ -541,10 +541,8 @@
       <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
       <div class="dark-overlay" id="content-modal">
         <div class="spotlight-view-container">
-          <!-- PastedVector-30.svg: Dark Blue Triangle Beam -->
           <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
 
-          <!-- PastedVector-29.svg: Circular Regional Map -->
           <div class="spotlight-circle-frame">
             <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
             <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
@@ -649,7 +647,7 @@
       introModal.classList.remove('active');
     });
 
-    // 3. MAP PINS CLICK (UKRAINE SWITCHES BASE MAP TO PastedVector-18.svg)
+    // 3. MAP PINS CLICK (BASE MAP REMAINS PastedVector-16.svg)
     document.querySelectorAll('.pin-btn').forEach(pin => {
       pin.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.id;
@@ -657,10 +655,6 @@
         if (data) {
           cardTitle.textContent = data.title;
           cardBody.textContent = data.body;
-          
-          if (id === 'ukraine') {
-            mainWorldMap.src = 'Resources/PastedVector-18.svg';
-          }
           
           contentModal.classList.add('active');
           e.currentTarget.classList.add('viewed');
