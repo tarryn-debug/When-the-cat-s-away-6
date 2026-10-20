@@ -30,7 +30,7 @@
 
     body {
       font-family: var(--font-main);
-      background-color: #f8f9fa;
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -39,13 +39,14 @@
       margin: 0;
     }
 
+    /* FLUID CONTAINER THAT ADAPTS TO MOODLE SIDEBAR TOGGLES */
     .interactive-container {
       width: 100%;
       max-width: 1120px;
       aspect-ratio: 16 / 9;
       background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
       position: relative;
       overflow: hidden;
     }
@@ -205,10 +206,10 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain !important;
+      object-fit: contain;
     }
 
-    /* MAP PINS WITH POP-UP ANIMATION & EXACT PIN-BOTTOM ANCHORING */
+    /* MAP PINS WITH POP-UP ANIMATION & PIN-BOTTOM ANCHORING */
     .pin-btn {
       position: absolute;
       transform: translate(-50%, -100%) scale(0);
@@ -229,7 +230,7 @@
     }
 
     .pin-img {
-      width: 24px;
+      width: 21px;
       height: auto;
       filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
     }
@@ -245,17 +246,17 @@
       }
     }
 
-    /* PIN TIP COORDINATES */
-    .pin-ukraine    { top: 29.5%; left: 53.2%; }
-    .pin-turkey     { top: 35.8%; left: 53.0%; }
-    .pin-georgia    { top: 32.2%; left: 56.1%; }
-    .pin-syria      { top: 38.6%; left: 54.8%; }
-    .pin-yemen      { top: 48.8%; left: 58.2%; }
-    .pin-indiachina { top: 32.0%; left: 66.8%; }
-    .pin-southchina { top: 48.2%; left: 76.5%; }
+    /* YOUR EXACT PROPOSED PIN COORDINATES (UNTOUCHED) */
+    .pin-ukraine    { top: 25.6%; left: 55.3%; }
+    .pin-turkey     { top: 32.4%; left: 56.5%; }
+    .pin-georgia    { top: 30.1%; left: 59.0%; }
+    .pin-syria      { top: 34.7%; left: 58.1%; }
+    .pin-yemen      { top: 47.3%; left: 61.1%; }
+    .pin-indiachina { top: 35.2%; left: 69.8%; }
+    .pin-southchina { top: 47.3%; left: 80.9%; }
 
     /* ========================================================= */
-    /* 3. MODALS & SPOTLIGHT OVERLAYS (COVER FULL CONTAINER)     */
+    /* 3. MODALS & SPOTLIGHT OVERLAYS                            */
     /* ========================================================= */
     .dark-overlay {
       position: absolute;
@@ -264,7 +265,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 300; /* Covers header area */
+      z-index: 300;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -275,6 +276,7 @@
       pointer-events: auto;
     }
 
+    /* UKRAINE SPOTLIGHT OVERLAY LAYERS */
     .spotlight-view-container {
       position: relative;
       width: 100%;
@@ -501,6 +503,7 @@
     </header>
 
     <main class="stage-view">
+      <!-- BASE MAP -->
       <img src="Resources/PastedVector-16.svg" id="main-world-map" alt="World Map" class="world-map-svg">
 
       <!-- Map Pins -->
@@ -535,11 +538,13 @@
         </div>
       </div>
 
-      <!-- SPOTLIGHT OVERLAY MODAL -->
+      <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
       <div class="dark-overlay" id="content-modal">
         <div class="spotlight-view-container">
+          <!-- PastedVector-30.svg: Dark Blue Triangle Beam -->
           <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
 
+          <!-- PastedVector-29.svg: Circular Regional Map -->
           <div class="spotlight-circle-frame">
             <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
             <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
@@ -644,7 +649,7 @@
       introModal.classList.remove('active');
     });
 
-    // 3. MAP PINS CLICK
+    // 3. MAP PINS CLICK (UKRAINE SWITCHES BASE MAP TO PastedVector-18.svg)
     document.querySelectorAll('.pin-btn').forEach(pin => {
       pin.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.id;
