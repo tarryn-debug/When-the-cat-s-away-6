@@ -206,7 +206,7 @@
       object-fit: contain;
     }
 
-    /* MAP PINS WITH POP-UP ANIMATION & PIN-BOTTOM ANCHORING */
+    /* MAP PINS WITH POP-UP ANIMATION & EXACT PIN-BOTTOM ANCHORING */
     .pin-btn {
       position: absolute;
       transform: translate(-50%, -100%) scale(0);
@@ -243,7 +243,7 @@
       }
     }
 
-    /* RE-CALIBRATED PIN TIP COORDINATES */
+    /* RESTORED PIN COORDINATES */
     .pin-ukraine    { top: 29.5%; left: 53.2%; }
     .pin-turkey     { top: 35.8%; left: 53.0%; }
     .pin-georgia    { top: 32.2%; left: 56.1%; }
@@ -285,7 +285,6 @@
       padding-bottom: 2.5rem;
     }
 
-    /* Dark Blue Triangle Projection (PastedVector-30.svg) */
     .spotlight-triangle-bg {
       position: absolute;
       top: 12%;
@@ -295,7 +294,6 @@
       z-index: 55;
     }
 
-    /* Circular Spotlight Map (PastedVector-29.svg) */
     .spotlight-circle-frame {
       position: absolute;
       top: 14%;
@@ -317,7 +315,6 @@
       object-fit: cover;
     }
 
-    /* Red Pin Overlay Inside Spotlight Circle (PastedVector-25.svg) */
     .spotlight-pin-icon {
       position: absolute;
       top: 42%;
@@ -502,7 +499,6 @@
     </header>
 
     <main class="stage-view">
-      <!-- MAIN BASE MAP (CHANGES TO PastedVector-18.svg WHEN UKRAINE IS CLICKED) -->
       <img src="Resources/PastedVector-16.svg" id="main-world-map" alt="World Map" class="world-map-svg">
 
       <!-- Map Pins -->
@@ -537,19 +533,16 @@
         </div>
       </div>
 
-      <!-- SPOTLIGHT OVERLAY MODAL (UKRAINE LAYERS ADDED) -->
+      <!-- SPOTLIGHT OVERLAY MODAL -->
       <div class="dark-overlay" id="content-modal">
         <div class="spotlight-view-container">
-          <!-- Dark Blue Triangle Graphic (PastedVector-30.svg) -->
           <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
 
-          <!-- Circular Regional Map Frame (PastedVector-29.svg) -->
           <div class="spotlight-circle-frame">
             <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
             <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
           </div>
 
-          <!-- Dialog Card -->
           <div class="dialog-card">
             <button class="close-card-btn" id="close-dialog-btn" aria-label="Close dialog">&times;</button>
             <h2 id="card-title">The invasion of Crimea and eastern Ukraine</h2>
@@ -649,7 +642,7 @@
       introModal.classList.remove('active');
     });
 
-    // 3. MAP PINS CLICK (UKRAINE SWITCHES BASE MAP TO PastedVector-18.svg)
+    // 3. MAP PINS CLICK
     document.querySelectorAll('.pin-btn').forEach(pin => {
       pin.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.id;
