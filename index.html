@@ -246,7 +246,7 @@
       }
     }
 
-    /* PIN COORDINATES */
+    /* YOUR EXACT PROPOSED PIN COORDINATES (UNTOUCHED) */
     .pin-ukraine    { top: 25.6%; left: 55.3%; }
     .pin-turkey     { top: 32.4%; left: 56.5%; }
     .pin-georgia    { top: 30.1%; left: 59.0%; }
@@ -256,9 +256,8 @@
     .pin-southchina { top: 47.3%; left: 80.9%; }
 
     /* ========================================================= */
-    /* 3. MODALS & SPOTLIGHT OVERLAYS                            */
+    /* 3. MODALS & SPOTLIGHT OVERLAYS (COVERS FULL CONTAINER)    */
     /* ========================================================= */
-    /* CHANGE 1: z-index set to 300 to cover entire block including header */
     .dark-overlay {
       position: absolute;
       inset: 0;
@@ -266,7 +265,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 300;
+      z-index: 300; /* Covers entire interactive container including header */
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -277,6 +276,7 @@
       pointer-events: auto;
     }
 
+    /* UKRAINE SPOTLIGHT OVERLAY LAYERS */
     .spotlight-view-container {
       position: relative;
       width: 100%;
@@ -503,7 +503,7 @@
     </header>
 
     <main class="stage-view">
-      <!-- CHANGE 2: BASE MAP REMAINS PastedVector-16.svg -->
+      <!-- BASE MAP -->
       <img src="Resources/PastedVector-16.svg" id="main-world-map" alt="World Map" class="world-map-svg">
 
       <!-- Map Pins -->
@@ -528,45 +528,49 @@
       <button class="pin-btn pin-southchina" data-id="southchina" aria-label="South China Sea">
         <img src="Resources/PastedVector-25.svg" alt="Pin" class="pin-img">
       </button>
-
-      <!-- INTRO OVERLAY MODAL -->
-      <div class="dark-overlay" id="intro-modal">
-        <div class="center-modal">
-          <img src="Resources/PastedVector-34.svg" alt="Instruction House Graphic" class="modal-badge-graphic">
-          <h2>The decline of US dominance has had significant repercussions around the world. Engage with this interactive infographic by clicking on the highlighted countries on the map to explore some of the consequences of the US’ retreat or non-intervention.</h2>
-          <button class="action-btn" id="intro-continue-btn">Continue</button>
-        </div>
-      </div>
-
-      <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
-      <div class="dark-overlay" id="content-modal">
-        <div class="spotlight-view-container">
-          <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
-
-          <div class="spotlight-circle-frame">
-            <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
-            <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
-          </div>
-
-          <div class="dialog-card">
-            <button class="close-card-btn" id="close-dialog-btn" aria-label="Close dialog">&times;</button>
-            <h2 id="card-title">The invasion of Crimea and eastern Ukraine</h2>
-            <p id="card-body">In 2013, Ukraine’s pro-Russian government suspended the signing of an association agreement with the European Union, sparking mass protests by the pro-European Maidan movement, the Ukrainian revolution and the overthrow of Ukraine’s pro-Russian government. In 2014, Russia took advantage of the internal conflict to impose itself in this part of the former Soviet Union, calculating that the US would not be able to deter it. First, it annexed Crimea, a peninsula in the Black Sea. Protestors in Crimea, backed by disguised Russian soldiers, rejected the new Ukrainian government, seized the local parliament building and organised a referendum, in which, Russia claimed, Crimeans voted overwhelmingly to join Russia. Soon after pro-Russian rebels seized territory in eastern Ukraine with the help of the Russian army, which led to brutal fighting and a humanitarian crisis.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- COMPLETION OVERLAY MODAL -->
-      <div class="dark-overlay" id="completion-modal">
-        <div class="center-modal">
-          <h2>You have completed this interactive infographic.<br>What would you like to do next?</h2>
-          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
-            <button class="action-btn" id="completion-exit-btn">Exit</button>
-            <button class="action-btn" id="completion-biblio-btn" style="background: var(--color-bg-light); color: var(--color-navy-header);">View bibliography</button>
-          </div>
-        </div>
-      </div>
     </main>
+
+    <!-- OVERLAYS MOVED TO DIRECT CHILDREN OF CONTAINER SO THEY COVER THE HEADER FULLY -->
+
+    <!-- INTRO OVERLAY MODAL -->
+    <div class="dark-overlay" id="intro-modal">
+      <div class="center-modal">
+        <img src="Resources/PastedVector-34.svg" alt="Instruction House Graphic" class="modal-badge-graphic">
+        <h2>The decline of US dominance has had significant repercussions around the world. Engage with this interactive infographic by clicking on the highlighted countries on the map to explore some of the consequences of the US’ retreat or non-intervention.</h2>
+        <button class="action-btn" id="intro-continue-btn">Continue</button>
+      </div>
+    </div>
+
+    <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
+    <div class="dark-overlay" id="content-modal">
+      <div class="spotlight-view-container">
+        <!-- PastedVector-30.svg: Dark Blue Triangle Beam -->
+        <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
+
+        <!-- PastedVector-29.svg: Circular Regional Map -->
+        <div class="spotlight-circle-frame">
+          <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
+          <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
+        </div>
+
+        <div class="dialog-card">
+          <button class="close-card-btn" id="close-dialog-btn" aria-label="Close dialog">&times;</button>
+          <h2 id="card-title">The invasion of Crimea and eastern Ukraine</h2>
+          <p id="card-body">In 2013, Ukraine’s pro-Russian government suspended the signing of an association agreement with the European Union, sparking mass protests by the pro-European Maidan movement, the Ukrainian revolution and the overthrow of Ukraine’s pro-Russian government. In 2014, Russia took advantage of the internal conflict to impose itself in this part of the former Soviet Union, calculating that the US would not be able to deter it. First, it annexed Crimea, a peninsula in the Black Sea. Protestors in Crimea, backed by disguised Russian soldiers, rejected the new Ukrainian government, seized the local parliament building and organised a referendum, in which, Russia claimed, Crimeans voted overwhelmingly to join Russia. Soon after pro-Russian rebels seized territory in eastern Ukraine with the help of the Russian army, which led to brutal fighting and a humanitarian crisis.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLETION OVERLAY MODAL -->
+    <div class="dark-overlay" id="completion-modal">
+      <div class="center-modal">
+        <h2>You have completed this interactive infographic.<br>What would you like to do next?</h2>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+          <button class="action-btn" id="completion-exit-btn">Exit</button>
+          <button class="action-btn" id="completion-biblio-btn" style="background: var(--color-bg-light); color: var(--color-navy-header);">View bibliography</button>
+        </div>
+      </div>
+    </div>
 
     <!-- BIBLIOGRAPHY OVERLAY -->
     <div class="biblio-overlay" id="biblio-overlay">
@@ -622,7 +626,6 @@
     const biblioOverlay = document.getElementById('biblio-overlay');
     const cardTitle = document.getElementById('card-title');
     const cardBody = document.getElementById('card-body');
-    const mainWorldMap = document.getElementById('main-world-map');
 
     const viewedMap = new Set();
 
@@ -647,7 +650,7 @@
       introModal.classList.remove('active');
     });
 
-    // 3. MAP PINS CLICK (BASE MAP REMAINS PastedVector-16.svg)
+    // 3. MAP PINS CLICK
     document.querySelectorAll('.pin-btn').forEach(pin => {
       pin.addEventListener('click', (e) => {
         const id = e.currentTarget.dataset.id;
@@ -681,7 +684,6 @@
 
     document.getElementById('btn-reset').addEventListener('click', () => {
       viewedMap.clear();
-      mainWorldMap.src = 'Resources/PastedVector-16.svg';
       document.querySelectorAll('.pin-btn').forEach(p => {
         p.classList.remove('viewed');
         p.classList.remove('animated');
