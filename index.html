@@ -246,7 +246,7 @@
       }
     }
 
-    /* YOUR EXACT PROPOSED PIN COORDINATES (UNTOUCHED) */
+    /* PIN COORDINATES (UNTOUCHED) */
     .pin-ukraine    { top: 25.6%; left: 55.3%; }
     .pin-turkey     { top: 32.4%; left: 56.5%; }
     .pin-georgia    { top: 30.1%; left: 59.0%; }
@@ -256,7 +256,7 @@
     .pin-southchina { top: 47.3%; left: 80.9%; }
 
     /* ========================================================= */
-    /* 3. MODALS & SPOTLIGHT OVERLAYS (COVERS FULL CONTAINER)    */
+    /* 3. MODALS & SPOTLIGHT OVERLAYS                            */
     /* ========================================================= */
     .dark-overlay {
       position: absolute;
@@ -265,7 +265,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 300; /* Covers entire interactive container including header */
+      z-index: 300;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -276,7 +276,7 @@
       pointer-events: auto;
     }
 
-    /* UKRAINE SPOTLIGHT OVERLAY LAYERS */
+    /* SPOTLIGHT VIEW CONTAINER */
     .spotlight-view-container {
       position: relative;
       width: 100%;
@@ -285,7 +285,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding-bottom: 2.5rem;
+      padding-bottom: 2rem;
     }
 
     .spotlight-triangle-bg {
@@ -330,12 +330,13 @@
       filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4));
     }
 
+    /* DIALOG CARD WITH REDUCED TOP PADDING TO SHIFT TEXT UP TO BEAM EDGE */
     .dialog-card {
       background: #ffffff;
       border-radius: 4px;
       width: 960px;
       max-width: 92%;
-      padding: 2.25rem 2.75rem;
+      padding: 1.5rem 2.75rem 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       position: relative;
       z-index: 315;
@@ -529,8 +530,6 @@
         <img src="Resources/PastedVector-25.svg" alt="Pin" class="pin-img">
       </button>
     </main>
-
-    <!-- OVERLAYS MOVED TO DIRECT CHILDREN OF CONTAINER SO THEY COVER THE HEADER FULLY -->
 
     <!-- INTRO OVERLAY MODAL -->
     <div class="dark-overlay" id="intro-modal">
