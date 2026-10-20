@@ -285,7 +285,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding-bottom: 2rem;
+      padding-bottom: 2.25rem;
+    }
+
+    /* TRIANGLE BEAM DIRECT SVG IMAGE (NO GAP) */
+    .spotlight-triangle-bg {
+      width: 960px;
+      max-width: 92%;
+      height: auto;
+      display: block;
+      margin-bottom: -1px; /* Locks triangle flush to top of card */
+      z-index: 310;
+      pointer-events: none;
     }
 
     /* CIRCULAR SPOTLIGHT FRAME */
@@ -321,29 +332,16 @@
       filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4));
     }
 
-    /* DIALOG CARD WITH INTEGRATED PastedVector-30.svg TRIANGLE BEAM */
+    /* DIALOG CARD FLUSH ATTACHED TO TRIANGLE BEAM */
     .dialog-card {
       background: #ffffff;
-      border-radius: 4px;
+      border-radius: 0 0 4px 4px;
       width: 960px;
       max-width: 92%;
-      padding: 2rem 2.75rem;
+      padding: 1.75rem 2.75rem 2.25rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       position: relative;
       z-index: 315;
-      margin-top: 0;
-    }
-
-    .dialog-card::before {
-      content: '';
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      width: 100%;
-      height: 210px;
-      background: url('Resources/PastedVector-30.svg') no-repeat bottom center / 100% 100%;
-      pointer-events: none;
-      z-index: 310;
     }
 
     .dialog-card h2 {
@@ -548,12 +546,16 @@
     <div class="dark-overlay" id="content-modal">
       <div class="spotlight-view-container">
 
-        <!-- PastedVector-29.svg: Circular Regional Map -->
+        <!-- TRIANGLE BEAM VECTOR (DIRECT IMG) -->
+        <img src="Resources/PastedVector-30.svg" alt="Triangle Light" class="spotlight-triangle-bg">
+
+        <!-- CIRCULAR SPOTLIGHT FRAME -->
         <div class="spotlight-circle-frame">
           <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
           <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
         </div>
 
+        <!-- DIALOG CARD -->
         <div class="dialog-card">
           <button class="close-card-btn" id="close-dialog-btn" aria-label="Close dialog">&times;</button>
           <h2 id="card-title">The invasion of Crimea and eastern Ukraine</h2>
