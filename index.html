@@ -324,22 +324,26 @@
       z-index: 320;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
       background-color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
+    /* PastedVector-29.svg is 150.8 x 145.5 and its circle is NOT in the middle of that box.
+       These sizes and offsets push the circle exactly into the middle of the frame,
+       so the white border is the same thickness all the way round. */
     .spotlight-circle-frame img.spotlight-map-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      position: absolute;
+      width: 106.65%;
+      height: 102.9%;
+      left: -3.25%;
+      top: -0.14%;
+      max-width: none;
       display: block;
     }
 
+    /* PIN TIP SITS ON THE MIDDLE OF UKRAINE */
     .spotlight-pin-icon {
       position: absolute;
-      top: 48%;
-      left: 50%;
+      top: 53.1%;
+      left: 50.8%;
       transform: translate(-50%, -100%);
       width: 20px;
       height: auto;
@@ -561,7 +565,7 @@
     <div class="dark-overlay" id="content-modal">
       <div class="spotlight-view-container">
 
-        <!-- TRIANGLE BEAM + CIRCLE -->
+        <!-- TRIANGLE BEAM + CIRCLE (circle sits on the tip of the triangle) -->
         <div class="spotlight-beam">
           <div class="spotlight-triangle-clip">
             <img src="Resources/PastedVector-30.svg" alt="" class="spotlight-triangle-bg">
