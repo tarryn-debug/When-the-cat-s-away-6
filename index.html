@@ -288,6 +288,14 @@
       padding-bottom: 2.25rem;
     }
 
+    /* Holds the triangle + text box together so they can move up/down as one piece */
+    .spotlight-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .spotlight-beam {
       position: relative;
       width: 960px;
@@ -314,7 +322,7 @@
     .spotlight-circle-frame {
       position: absolute;
       top: 36%;
-      left: 55.5%;
+      left: calc(55.5% + var(--dx, 0px));
       transform: translate(-50%, -50%);
       width: 132px;
       height: 132px;
@@ -564,15 +572,16 @@
     <!-- SPOTLIGHT OVERLAY MODAL FOR UKRAINE -->
     <div class="dark-overlay" id="content-modal">
       <div class="spotlight-view-container">
+       <div class="spotlight-stack" id="spotlight-stack">
 
         <!-- TRIANGLE BEAM + CIRCLE (circle sits on the tip of the triangle) -->
-        <div class="spotlight-beam">
+        <div class="spotlight-beam" id="spotlight-beam">
           <div class="spotlight-triangle-clip">
             <img src="Resources/PastedVector-30.svg" alt="" class="spotlight-triangle-bg">
           </div>
 
           <!-- CIRCULAR SPOTLIGHT FRAME -->
-          <div class="spotlight-circle-frame">
+          <div class="spotlight-circle-frame" id="spotlight-circle">
             <img src="Resources/PastedVector-29.svg" alt="Regional Map Spotlight" class="spotlight-map-bg">
             <img src="Resources/PastedVector-25.svg" alt="Location Pin" class="spotlight-pin-icon">
           </div>
@@ -584,6 +593,7 @@
           <h2 id="card-title">The invasion of Crimea and eastern Ukraine</h2>
           <p id="card-body">In 2013, Ukraine’s pro-Russian government suspended the signing of an association agreement with the European Union, sparking mass protests by the pro-European Maidan movement, the Ukrainian revolution and the overthrow of Ukraine’s pro-Russian government. In 2014, Russia took advantage of the internal conflict to impose itself in this part of the former Soviet Union, calculating that the US would not be able to deter it. First, it annexed Crimea, a peninsula in the Black Sea. Protestors in Crimea, backed by disguised Russian soldiers, rejected the new Ukrainian government, seized the local parliament building and organised a referendum, in which, Russia claimed, Crimeans voted overwhelmingly to join Russia. Soon after pro-Russian rebels seized territory in eastern Ukraine with the help of the Russian army, which led to brutal fighting and a humanitarian crisis.</p>
         </div>
+       </div>
       </div>
     </div>
 
@@ -654,6 +664,54 @@
     const cardBody = document.getElementById('card-body');
 
     const viewedMap = new Set();
+    let activePin = null;
+
+    // Puts the spotlight circle exactly over the pin that was clicked, so it does not "jump"
+    function alignSpotlightToPin(pin) {
+      if (!pin) return;
+      const app = document.getElementById('interactive-app');
+      const stage = document.querySelector('.stage-view');
+      const stack = document.getElementById('spotlight-stack');
+      const circle = document.getElementById('spotlight-circle');
+      const card = document.querySelector('.dialog-card');
+      const pinImg = pin.querySelector('.pin-img');
+
+      // start from the default layout
+      stack.style.transform = '';
+      circle.style.setProperty('--dx', '0px');
+
+      const appRect = app.getBoundingClientRect();
+      const scale = appRect.width / app.offsetWidth || 1;
+
+      // tip of the pin, measured from the top-left of the interactive
+      const gap = pin.offsetHeight - pinImg.offsetHeight;
+      const tipX = stage.offsetLeft + pin.offsetLeft;
+      const tipY = stage.offsetTop + pin.offsetTop - gap;
+
+      // where the circle is now
+      const c = circle.getBoundingClientRect();
+      const cx = (c.left + c.width / 2 - appRect.left) / scale;
+      const cy = (c.top + c.height / 2 - appRect.top) / scale;
+      const radius = c.height / 2 / scale;
+
+      let dy = tipY - cy;
+      let dx = tipX - cx;
+
+      // keep everything inside the interactive
+      const cardBottom = (card.getBoundingClientRect().bottom - appRect.top) / scale;
+      const maxDown = app.offsetHeight - 8 - cardBottom;
+      const maxUp = 4 - (cy - radius);
+      // the text box always stays fully visible; the circle follows the pin as closely as the space allows
+      dy = Math.min(maxDown, Math.max(maxUp, dy));
+      dx = Math.max(-14, Math.min(14, dx));
+
+      stack.style.transform = 'translateY(' + dy + 'px)';
+      circle.style.setProperty('--dx', dx + 'px');
+    }
+
+    window.addEventListener('resize', () => {
+      if (contentModal.classList.contains('active')) alignSpotlightToPin(activePin);
+    });
 
     // 1. CLICK START: HIDE COVER, ANIMATE MAP PINS SEQUENTIALLY, THEN SHOW INSTRUCTION MODAL
     document.getElementById('btn-start-cover').addEventListener('click', () => {
@@ -684,7 +742,9 @@
         if (data) {
           cardTitle.textContent = data.title;
           cardBody.textContent = data.body;
-          
+
+          activePin = e.currentTarget;
+          alignSpotlightToPin(activePin);
           contentModal.classList.add('active');
           e.currentTarget.classList.add('viewed');
           viewedMap.add(id);
